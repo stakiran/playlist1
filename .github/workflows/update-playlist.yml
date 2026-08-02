@@ -1,0 +1,35 @@
+name: update-playlist
+
+on:
+  schedule:
+    # JST 日曜 05:00 = UTC 土曜 20:00
+    - cron: '0 20 * * 6'
+  workflow_dispatch: {}  # 手動実行用
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: fetch playlist and update index.html
+        run: python update_index.py
+
+      - name: commit and push if changed
+        run: |
+          if git diff --quiet; then
+            echo "変更なし"
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html urls.txt
+          git commit -m "auto: playlist update"
+          git push
