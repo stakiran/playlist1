@@ -268,3 +268,5 @@
   "https://www.youtube.com/shorts/6l1DBv01YDA",
   "https://www.youtube.com/shorts/Tfeaagsq_6U",
   "https://www.youtube.com/shorts/sgAg93AGJoY",
+  "https://www.youtube.com/shorts/2e5HN6aS42M",
+  "https://www.youtube.com/shorts/nE6A36eiwEE",
